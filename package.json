@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts"
+    "dev": "cross-env NODE_ENV=dev ts-node-dev --respawn src/index.ts",
+    "qa": "cross-env NODE_ENV=qa ts-node-dev --respawn src/index.ts",
+    "prod": "cross-env NODE_ENV=prod ts-node-dev --respawn src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/mssql": "^9.1.7",
+    "cross-env": "^7.0.3",
     "ts-node-dev": "^2.0.0"
   },
   "dependencies": {
