@@ -33,10 +33,11 @@ export const createNote = async (req, res) => {
 
   const result = await pool.request()
   .input('title', sql.NVarChar, req.body.Title)
-  .input('content', sql.NVarChar, req.body.Content)
-  .input('active', sql.Bit, req.body.Active)
+  .input('description', sql.NVarChar, req.body.Description)
+  .input('completed', sql.Bit, req.body.Completed)
   .input('creationdate', sql.DateTime, req.body.CreationDate)
-  .query('INSERT INTO todo.Notes (title, content, active, creationdate) VALUES (@title, @content, @active, @creationdate); SELECT @@IDENTITY AS id;');
+  .input('updated_at', sql.DateTime, req.body.Updated_at)
+  .query('INSERT INTO todo.Notes (title, description, completed, creationdate,updated_at) VALUES (@title, @description, @completed, @creationdate, @updated_at); SELECT @@IDENTITY AS id;');
 
   console.log(result);
 
@@ -44,9 +45,10 @@ export const createNote = async (req, res) => {
     message: 'Nota creada',
      body: {
       title: req.body.Title,
-      content: req.body.Content,
-      active: req.body.Active,
-      creationdate: req.body.Creationdate
+      description: req.body.Description,
+      completed: req.body.Completed,
+      creationdate: req.body.Creationdate,
+      updated_at: req.body.Updated_at
 }});
 } 
 
@@ -56,10 +58,11 @@ export const updateNote = async (req, res) => {
   const result = await pool.request()
   .input('id', sql.Int, req.params.id)
   .input('title', sql.NVarChar, req.body.Title)
-    .input('content', sql.NVarChar, req.body.Content)
-    .input('active', sql.Bit, req.body.Active)
+    .input('description', sql.NVarChar, req.body.Description)
+    .input('completed', sql.Bit, req.body.Completed)
     .input('creationdate', sql.DateTime, req.body.CreationDate)
-  .query('UPDATE todo.Notes SET title = @title, content = @content, active = @active, creationdate = @creationdate WHERE idNote = @id');
+    .input('updated_at', sql.DateTime, req.body.Updated_at)
+  .query('UPDATE todo.Notes SET title = @title, description = @description, completed = @completed, creationdate = @creationdate, updated_at = @updated_at WHERE idNote = @id');
 
   console.log(result);
   
@@ -72,9 +75,10 @@ export const updateNote = async (req, res) => {
         message: 'Nota actualizada',
         body: {
             title: req.body.Title,
-            content: req.body.Content,
-            active: req.body.Active,
-            creationdate: req.body.Creationdate
+            description: req.body.Description,
+            completed: req.body.Completed,
+            creationdate: req.body.Creationdate,
+            updated_at: req.body.Updated_at
         }
     });
 }
