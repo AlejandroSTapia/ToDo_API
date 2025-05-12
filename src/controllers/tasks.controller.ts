@@ -32,10 +32,10 @@ export const createTask = async (req, res) => {
   const pool = await getConnection();
 
   const result = await pool.request()
-  .input('title', sql.NVarChar, req.body.title)
-  .input('description', sql.NVarChar, req.body.description)
-  .input('completed', sql.Bit, req.body.completed)
-  .input('creationdate', sql.DateTime, req.body.creationdate)
+  .input('title', sql.NVarChar, req.body.Title)
+  .input('description', sql.NVarChar, req.body.Description)
+  .input('completed', sql.Bit, req.body.Completed)
+  .input('creationdate', sql.DateTime, req.body.CreationDate)
   .input('updated_at', sql.DateTime, req.body.updated_at)
   .query('INSERT INTO todo.Tasks (title, description, completed, creationdate,updated_at) VALUES (@title, @description, @completed, @creationdate, @updated_at); SELECT @@IDENTITY AS id;');
 
@@ -57,10 +57,10 @@ export const updateTask = async (req, res) => {
 
   const result = await pool.request()
   .input('id', sql.Int, req.params.id)
-  .input('title', sql.NVarChar, req.body.title)
-    .input('description', sql.NVarChar, req.body.description)
-    .input('completed', sql.Bit, req.body.completed)
-    .input('creationdate', sql.DateTime, req.body.creationdate)
+  .input('title', sql.NVarChar, req.body.Title)
+    .input('description', sql.NVarChar, req.body.Description)
+    .input('completed', sql.Bit, req.body.Completed)
+    .input('creationdate', sql.DateTime, req.body.CreationDate)
     .input('updated_at', sql.DateTime, req.body.updated_at)
   .query('UPDATE todo.Tasks SET title = @title, description = @description, completed = @completed, creationdate = @creationdate, updated_at = @updated_at WHERE idTask = @id');
 
