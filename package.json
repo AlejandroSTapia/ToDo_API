@@ -23,6 +23,7 @@
   "homepage": "https://github.com/AlejandroSTapia/ToDo_API#readme",
   "description": "",
   "devDependencies": {
+    "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/mssql": "^9.1.7",
     "cross-env": "^7.0.3",
