@@ -27,6 +27,7 @@ export const getTaskId = async (req, res) => {
   return res.json(result.recordset[0]);
 }
 
+
 export const createTask = async (req, res) => {
   console.log('Cuerpo de la solicitud:',req.body);
   const pool = await getConnection();
