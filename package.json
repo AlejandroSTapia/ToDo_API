@@ -7,7 +7,7 @@
     "qa": "cross-env NODE_ENV=qa ts-node-dev --respawn src/index.ts",
     "prod": "cross-env NODE_ENV=prod ts-node-dev --respawn src/index.ts",
     "build": "tsc",
-    "start": "node index.js"
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
