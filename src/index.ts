@@ -3,7 +3,10 @@ import dotenv from "dotenv";
 import path from "path";
 
 const env = process.env.NODE_ENV || 'dev';
-dotenv.config({ path: path.resolve(__dirname, `.env.${env}`) });
+dotenv.config({ path: path.resolve(__dirname, `../.env.${env}`) });
 
-app.listen(3000);
-console.log('Servidor iniciado en port 3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en puerto ${PORT}`);
+});
