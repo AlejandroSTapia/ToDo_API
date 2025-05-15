@@ -1,14 +1,15 @@
 import sql from 'mssql';
+import dotenv from 'dotenv';
 
 const dbSettings = {
-    user: "sa",
-    password: "Alex1122",
-    server: "localhost", 
-    database: "STDev",
-    options: {
-        encrypt: false, // Use this if you're on Windows Azure o false ya que no esta desplegado 
-        trustServerCertificate: true, // Change to true for local dev / self-signed certs
-    }
+    user: process.env.DB_USER as string,
+  password: process.env.DB_PASSWORD as string,
+  server: process.env.DB_SERVER as string,
+  database: process.env.DB_DATABASE as string,
+  options: {
+    encrypt: process.env.DB_ENCRYPT === 'true',
+    trustServerCertificate: process.env.DB_TRUST_CERT === 'true',
+  }
 }
 
 export const getConnection = async () => {
