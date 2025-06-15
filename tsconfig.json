@@ -2,11 +2,11 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "target": "ES6",
+    "target": "ES2022",
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "lib": ["ES6"],       
+    "lib": ["ES2022", "DOM"],       
     "types": ["node"] 
   },
   "include": ["src"]
