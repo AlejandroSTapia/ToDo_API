@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,17 +16,17 @@ exports.deleteTask = exports.updateTask = exports.createTask = exports.getTaskId
 const connection_1 = require("../database/connection");
 const mssql_1 = __importDefault(require("mssql"));
 const pool = (0, connection_1.getConnection)();
-const getTasks = async (req, res) => {
-    const pool = await (0, connection_1.getConnection)();
-    const result = await pool.request().query('SELECT * FROM todo.Tasks');
+const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const pool = yield (0, connection_1.getConnection)();
+    const result = yield pool.request().query('SELECT * FROM todo.Tasks');
     console.log(result);
     res.json(result.recordset);
-};
+});
 exports.getTasks = getTasks;
-const getTaskId = async (req, res) => {
+const getTaskId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.params);
-    const pool = await (0, connection_1.getConnection)();
-    const result = await pool.request()
+    const pool = yield (0, connection_1.getConnection)();
+    const result = yield pool.request()
         .input('id', mssql_1.default.Int, req.params.id)
         .query('SELECT * FROM todo.Tasks WHERE IdTask = @id');
     if (result.recordset.length === 0) {
@@ -26,12 +35,12 @@ const getTaskId = async (req, res) => {
         });
     }
     return res.json(result.recordset[0]);
-};
+});
 exports.getTaskId = getTaskId;
-const createTask = async (req, res) => {
+const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('Cuerpo de la solicitud:', req.body);
-    const pool = await (0, connection_1.getConnection)();
-    const result = await pool.request()
+    const pool = yield (0, connection_1.getConnection)();
+    const result = yield pool.request()
         .input('title', mssql_1.default.NVarChar, req.body.Title)
         .input('description', mssql_1.default.NVarChar, req.body.Description)
         .input('completed', mssql_1.default.Bit, req.body.Completed)
@@ -49,11 +58,11 @@ const createTask = async (req, res) => {
             updated_at: req.body.updated_at
         }
     });
-};
+});
 exports.createTask = createTask;
-const updateTask = async (req, res) => {
-    const pool = await (0, connection_1.getConnection)();
-    const result = await pool.request()
+const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const pool = yield (0, connection_1.getConnection)();
+    const result = yield pool.request()
         .input('id', mssql_1.default.Int, req.params.id)
         .input('title', mssql_1.default.NVarChar, req.body.Title)
         .input('description', mssql_1.default.NVarChar, req.body.Description)
@@ -77,11 +86,11 @@ const updateTask = async (req, res) => {
             updated_at: req.body.Updated_at
         }
     });
-};
+});
 exports.updateTask = updateTask;
-const deleteTask = async (req, res) => {
-    const pool = await (0, connection_1.getConnection)();
-    const result = await pool.request()
+const deleteTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const pool = yield (0, connection_1.getConnection)();
+    const result = yield pool.request()
         .input('id', mssql_1.default.Int, req.params.id)
         .query('DELETE FROM todo.Tasks WHERE IdTask = @id');
     console.log(result);
@@ -93,5 +102,5 @@ const deleteTask = async (req, res) => {
     return res.json({
         message: 'Tarea eliminada con id ' + req.params.id
     });
-};
+});
 exports.deleteTask = deleteTask;
