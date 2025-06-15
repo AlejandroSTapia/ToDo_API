@@ -1,13 +1,15 @@
 import express from 'express';
-import TasksRoutes from './routes/tasks.routes';
+import tasksRoutes from './routes/tasks.routes';
 import cors from 'cors';
 
 const app = express();
-
 app.use(cors());
-
 app.use(express.json());
 
-app.use(TasksRoutes);
+app.use("/api", tasksRoutes); 
+
+app.get("/", (req, res) => {
+  res.send("API funcionando correctamente en Azure");
+});
 
 export default app;
