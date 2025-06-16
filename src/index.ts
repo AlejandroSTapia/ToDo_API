@@ -1,11 +1,9 @@
-import dotenv from "dotenv";
-import path from "path";
+import * as dotenv from "dotenv";
 
-const env = process.env.NODE_ENV || 'dev';
+  dotenv.config({ 
+    path: process.env.NODE_ENV === "production" ? ".env.prod" : ".env.dev"
+  });
 
-if (env !== "production") {
-  dotenv.config({ path: path.resolve(__dirname, `../.env.${env}`) });
-}
 
 import app from "./app";
 
