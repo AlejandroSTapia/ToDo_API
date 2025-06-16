@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: ToDo_API
           path: .
 
   deploy:
@@ -49,8 +49,8 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
-          path: ./node-app
+          name: ToDo_API
+          path: ./ToDo_API
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -65,5 +65,5 @@ jobs:
         with:
           app-name: 'TasksAPI-Node'
           slot-name: 'Production'
-          package: ./node-app
+          package: ./ToDo_API
           
